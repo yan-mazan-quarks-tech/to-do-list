@@ -2,10 +2,7 @@
 const express = require('express');
 const app = express();
 const port = 3000;
- 
-// Serving static files (HTML, CSS, JS)
-app.use(express.static('public'));
-// Defining a route for handling client communication
+
 app.get('/api/message', (req, res) => {
     const message = 'Hello Geek. This Message is From Server';
     res.json({ message });
