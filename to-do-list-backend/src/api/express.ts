@@ -57,7 +57,7 @@ export function createServer(dependencies: Dependencies): Express {
     app.get('/api/tasks', (_, resp: Response) => {
         const tasks = dependencies.storage.listTasks();
 
-        resp.status(StatusCodes.CREATED);
+        resp.status(StatusCodes.OK);
         resp.send({ tasks: tasks })
     })
 
