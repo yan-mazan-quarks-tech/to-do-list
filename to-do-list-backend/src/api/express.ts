@@ -19,14 +19,20 @@ export function createServer(dependencies: Dependencies): Express {
         if (typeof req.body?.name !== 'string') {
             resp.status(StatusCodes.BAD_REQUEST);
             resp.send('name of the task should be string');
+
+            return;
         }
         if (typeof req.body?.description !== 'string') {
             resp.status(StatusCodes.BAD_REQUEST);
             resp.send('description of the task should be string');
+
+            return;
         }
         if (typeof req.body?.scheduledAt !== 'number') {
             resp.status(StatusCodes.BAD_REQUEST);
             resp.send('scheduledAt of the task should be number');
+
+            return;
         }
     
         const task = new Task(
@@ -39,19 +45,25 @@ export function createServer(dependencies: Dependencies): Express {
         dependencies.storage.addTask(task);
 
         resp.status(StatusCodes.CREATED);
-        resp.send({ task: task })
+        resp.send({ task: task });
+
+        return;
     })
 
     app.delete('/api/task', (req: Request, resp: Response) => {
         if (typeof req.body?.name !== 'string') {
             resp.status(StatusCodes.BAD_REQUEST);
             resp.send('name of the task should be string');
+
+            return;
         }
 
         dependencies.storage.deleteTask(req.body.name);
 
         resp.status(StatusCodes.OK);
         resp.send({});
+
+        return;
     })
 
     app.get('/api/tasks', (_, resp: Response) => {
@@ -59,6 +71,8 @@ export function createServer(dependencies: Dependencies): Express {
 
         resp.status(StatusCodes.OK);
         resp.send({ tasks: tasks })
+
+        return;
     })
 
     return app;
