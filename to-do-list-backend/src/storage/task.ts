@@ -9,6 +9,6 @@ export class Task {
     constructor(name: string, description: string, createdAt: number, scheduledAt: number, done: boolean) {
         this.name = name;
         this.description: description;
-        this.done = false // initialize done as false
+        this.done = false; // initialize done as false
      }
 }

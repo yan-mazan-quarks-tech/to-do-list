@@ -54,7 +54,7 @@ export function createServer(dependencies: Dependencies): Express {
         resp.send({});
     })
 
-    app.get('/api/task', (_, resp: Response) => {
+    app.get('/api/tasks', (_, resp: Response) => {
         const tasks = dependencies.storage.listTasks();
 
         resp.status(StatusCodes.OK);
@@ -69,7 +69,7 @@ export function createServer(dependencies: Dependencies): Express {
             task.done = true;
             res.status(StatusCodes.OK).send(task);
         } else {
-            res.status(StatusCodes.BAD_REQUEST).send({ error: 'Task not found' });
+            res.status(StatusCodes.NOT_FOUND).send({ error: 'Task not found' });
         }
     });
 
@@ -81,7 +81,7 @@ export function createServer(dependencies: Dependencies): Express {
             task.done = false;
             res.status(StatusCodes.OK).send(task);
         } else {
-            res.status(StatusCodes.BAD_REQUEST).send({ error: 'Task not found'});
+            res.status(StatusCodes.NOT_FOUND).send({ error: 'Task not found'});
         }
     });
 

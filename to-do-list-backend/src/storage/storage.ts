@@ -20,4 +20,14 @@ export class Storage {
     deleteTask(name: string) {
         this.tasks = this.tasks.filter((task: Task, _) => task.name !== name);
     }
+
+    updateTask(task: Task) {
+        this.tasks.map((t: Task) => {
+            if (t.name === task.name) {
+                return task;
+            }
+    
+            return t;
+        })
+    }
 }
