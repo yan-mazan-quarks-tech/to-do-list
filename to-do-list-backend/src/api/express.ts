@@ -61,5 +61,29 @@ export function createServer(dependencies: Dependencies): Express {
         resp.send({ tasks: tasks })
     })
 
+    app.post('/api/task/mark-done', (req, res) => {
+        const { name } = req.body;
+
+        const task = tasks.find(task => task.name === name);
+        if (task) {
+            task.done = true;
+            res.status(StatusCodes.OK).send(task);
+        } else {
+            res.status(StatusCodes.NOT_FOUND).send({ error: 'Task not found' });
+        }
+    });
+
+    app.post('/api/task/mark-undone', (req, res) => {
+        const { name } = req.body;
+
+        const task = tasks.find(task => task.name === name);
+        if (task) {
+            task.done = false;
+            res.status(StatusCodes.OK).send(task);
+        } else {
+            res.status(StatusCodes.NOT_FOUND).send({ error: 'Task not found'});
+        }
+    });
+
     return app;
 }
